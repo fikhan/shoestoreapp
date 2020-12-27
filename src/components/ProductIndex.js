@@ -1,9 +1,7 @@
-import { React } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-
-export const ProductDetails = () => {
-
+export const ProductIndex = () => {
     const shoes = {
         "dalton-shell-cordovan-dress-boots": {
             name: "Dalton Shell Cordovan Dress Boots",
@@ -22,16 +20,25 @@ export const ProductDetails = () => {
 
         }
     }
-    const {productID} = useParams();
-    const product = shoes[productID];
     
-   const {name, img} = product;
-
+    
     return (
         <div> 
-          <h4>{name}</h4>
-          <img src={img} alt={name} />
+            Product Index
+            <ul>
+                {Object.entries(shoes).map(([productID,{name, img}]) => 
+                  (
+                    <li key={productID}>
+                       <Link to={productID}>
+                          
+                          <h2> {name} </h2>
+                          <img src={img} alt={name} />
+
+                       </Link>
+                    </li>
+                  )
+                )}
+            </ul>
         </div>
     )
-
 }
